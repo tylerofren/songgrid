@@ -26,9 +26,13 @@ const songs = [
     { id: 19, name: 'DevonWebb' },
 ]
 
+const songs2 = []
+
 export default function SongSearch() {
     const [query, setQuery] = useState('  ')
-    const [selected, setSelected] = useState()
+    const [selected, setSelected] = useState('')
+
+
 
     const filteredSongs =
         query === ''
@@ -37,20 +41,39 @@ export default function SongSearch() {
                 return song.name.toLowerCase().includes(query.toLowerCase())
             }).slice(0, 8)
 
-    // const getRace = async () => {
-    //     await axios
-    //         .get('http://ergast.com/api/f1/current/last/results.json')
-    //         .then(response => {
-    //             console.log(response)
-    //         })
-    // }
+    const fetchSongs = () => {
+        axios
+            .get(`https://ws.audioscrobbler.com/2.0/?method=track.search&track=${query}&api_key=93b076b0e136a204f45a69292934aade&format=json`)
+            .then(response => {
+                songs2.splice(0, songs2.length)
+                // for (let i = 0; i < 8; i++) {
+                    songs2.push({
+                        id: 0, name: response.data.results.trackmatches.track[0].name, artist: response.data.results.trackmatches.track[0].artist, 
+                        searchtags: response.data.results.trackmatches.track[0].name + response.data.results.trackmatches.track[0].artist
+                    })
+                // }
+
+                // console.log(response.data.results.trackmatches.track[i])
+            })
+    }
+
+    fetchSongs()
+
     // useEffect(() => {
-    //     getRace()
+    //     fetchSongs()
     // }, [])
+
+    const filteredSongs2 =
+        query === ''
+            ? songs2.slice(0, 8)
+            : songs2.filter((song) => {
+                return song.searchtags.toLowerCase().includes(query.toLowerCase().replace(/ +/g,""))
+            }).slice(0, 8)
+    
 
     return (
         <div className="mx-auto h-full w-full pt-4">
-            <Combobox value={selected} onChange={(value) => setSelected(value)} onClose={() => setQuery('')} __demoMode>
+            <Combobox value={selected} onChange={(value) => setSelected(value)} onClose={() => setQuery(query)} __demoMode>
                 <div className="relative">
                     <ComboboxInput
                         spellCheck='false'
@@ -74,14 +97,14 @@ export default function SongSearch() {
                         'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0 z-40'
                     )}
                 >
-                    {filteredSongs.map((person) => (
+                    {filteredSongs2.map((person) => (
                         <ComboboxOption
                             key={person.id}
                             value={person}
                             className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-white/10"
                         >
                             <CheckIcon className="invisible size-4 fill-black group-data-[selected]:visible" />
-                            <div className="text-sm/6 text-black">{person.name}</div>
+                            <div className="text-sm/6 text-black">{person.name} - {person.artist}</div>
                         </ComboboxOption>
                     ))}
                 </ComboboxOptions>
