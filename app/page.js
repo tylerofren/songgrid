@@ -17,7 +17,10 @@ export default function Home() {
             <div className="pt-8">
                 <div>Coming Soon</div>
                 <div>A daily guessing game for songs!</div>
+                
             </div>
+
+            <div className="">tylerofreneo@gmail.com</div>
 
 
             {/* <div className="">
