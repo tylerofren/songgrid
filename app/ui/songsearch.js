@@ -37,16 +37,16 @@ export default function SongSearch() {
                 return song.name.toLowerCase().includes(query.toLowerCase())
             }).slice(0, 8)
 
-    const getRace = async () => {
-        await axios
-            .get('http://ergast.com/api/f1/current/last/results.json')
-            .then(response => {
-                console.log(response)
-            })
-    }
-    useEffect(() => {
-        getRace()
-    }, [])
+    // const getRace = async () => {
+    //     await axios
+    //         .get('http://ergast.com/api/f1/current/last/results.json')
+    //         .then(response => {
+    //             console.log(response)
+    //         })
+    // }
+    // useEffect(() => {
+    //     getRace()
+    // }, [])
 
     return (
         <div className="mx-auto h-full w-full pt-4">
