@@ -9,12 +9,18 @@ export default function Home() {
     const [showModal, setShowModal] = useState(false);
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-between p-14">
+        <div className="flex min-h-screen flex-col items-start justify-start p-14">
             <div className="relative flex place-items-center text-slate-800 text-5xl font-semibold">
                 SongGrid
             </div>
-            
-            <div className="">
+
+            <div className="pt-8">
+                <div>Coming Soon</div>
+                <div>A daily guessing game for songs!</div>
+            </div>
+
+
+            {/* <div className="">
                 <main className="flex flex-col items-center relative text-[24x] w-[560px] h-[560px]">
                     <div className="grid grid-cols-[15%_25%_25%_25%_15%] grid-rows-[16%_28%_28%_28%] gap-0 w-full h-full text-[14px]">
                         <div className="text-center row-start-1 col-start-2 pb-5 px-2 flex items-center justify-center"><button>short category</button></div>
@@ -72,7 +78,7 @@ export default function Home() {
 
 
 
-            {showModal && createPortal(<Modal open={showModal} onClose={() => setShowModal(false)}></Modal>, document.body)}
+            {showModal && createPortal(<Modal open={showModal} onClose={() => setShowModal(false)}></Modal>, document.body)} */}
         </div>
     );
 }
