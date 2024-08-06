@@ -1,26 +1,52 @@
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const people = [
-    { id: 1, name: 'Tom Cook' },
-    { id: 2, name: 'Wade Cooper' },
-    { id: 3, name: 'Tanya Fox' },
-    { id: 4, name: 'Arlene Mccoy' },
-    { id: 5, name: 'Devon Webb' },
+const songs = [
+    { id: 1, name: 'Mo bamba' },
+    { id: 2, name: 'Fortnite' },
+    { id: 3, name: 'Sickomode' },
+    { id: 4, name: 'Beepboop' },
+    { id: 5, name: 'DevonWebb' },
+    { id: 6, name: 'DevonWebb' },
+    { id: 7, name: 'DevonWebb' },
+    { id: 8, name: 'DevonWebb' },
+    { id: 9, name: 'DevonWebb' },
+    { id: 10, name: 'DevonWebb' },
+    { id: 11, name: 'DevonWebb' },
+    { id: 12, name: 'DevonWebb' },
+    { id: 13, name: 'DevonWebb' },
+    { id: 14, name: 'DevonWebb' },
+    { id: 15, name: 'DevonWebb' },
+    { id: 16, name: 'DevonWebb' },
+    { id: 17, name: 'DevonWebb' },
+    { id: 18, name: 'DevonWebb' },
+    { id: 19, name: 'DevonWebb' },
 ]
 
 export default function SongSearch() {
     const [query, setQuery] = useState('  ')
     const [selected, setSelected] = useState()
 
-    const filteredPeople =
+    const filteredSongs =
         query === ''
-            ? people
-            : people.filter((person) => {
-                return person.name.toLowerCase().includes(query.toLowerCase())
+            ? songs.slice(0, 8)
+            : songs.filter((song) => {
+                return song.name.toLowerCase().includes(query.toLowerCase())
+            }).slice(0, 8)
+
+    const getRace = async () => {
+        await axios
+            .get('http://ergast.com/api/f1/current/last/results.json')
+            .then(response => {
+                console.log(response)
             })
+    }
+    useEffect(() => {
+        getRace()
+    }, [])
 
     return (
         <div className="mx-auto h-full w-full pt-4">
@@ -48,7 +74,7 @@ export default function SongSearch() {
                         'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0 z-40'
                     )}
                 >
-                    {filteredPeople.map((person) => (
+                    {filteredSongs.map((person) => (
                         <ComboboxOption
                             key={person.id}
                             value={person}
