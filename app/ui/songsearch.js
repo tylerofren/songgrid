@@ -15,7 +15,7 @@ export default function SongSearch() {
             .get(`https://ws.audioscrobbler.com/2.0/?method=track.search&track=${query}&api_key=93b076b0e136a204f45a69292934aade&format=json`)
             .then(response => {
                 console.log('searching w query ' + query)
-                
+
                 songs2.splice(0, songs2.length)
                 if (query != '') {
                     let length = Object.keys(response.data.results.trackmatches.track).length
@@ -25,7 +25,8 @@ export default function SongSearch() {
                         let artist = response.data.results.trackmatches.track[i].artist
                         songs2.push({
                             id: name + ' - ' + artist, name: name + ' - ' + artist, artist: artist,
-                            searchtags: response.data.results.trackmatches.track[i].name + response.data.results.trackmatches.track[i].artist
+                            searchtags: response.data.results.trackmatches.track[i].name + response.data.results.trackmatches.track[i].artist,
+                            searchtags2: artist + name
                         })
                     }
                 }
@@ -39,13 +40,14 @@ export default function SongSearch() {
         query === ''
             ? songs2.splice(0, 8)
             : songs2.filter((song) => {
-                return song.searchtags.toLowerCase().replace(/ +/g, "").includes(query.toLowerCase().replace(/ +/g, ""))
+                return song.searchtags.toLowerCase().replace(/ +/g, "").includes(query.toLowerCase().replace(/ +/g, "")) ||
+                    song.searchtags2.toLowerCase().replace(/ +/g, "").includes(query.toLowerCase().replace(/ +/g, ""))
             }).slice(0, 8)
 
 
     return (
         <div className="mx-auto h-full w-full pt-4">
-            <Combobox immediate value={selected} onChange={(value) => {setSelected(value)}} onClose={() => {setQuery(query); fetchSongs()}} __demoMode>
+            <Combobox immediate value={selected} onChange={(value) => { setSelected(value) }} onClose={() => { setQuery(query); fetchSongs() }} __demoMode>
                 <div className="relative">
                     <ComboboxInput
                         spellCheck='false'
@@ -54,7 +56,7 @@ export default function SongSearch() {
                             'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
                         )}
                         displayValue={(person) => person?.name}
-                        onChange={(event) => {setQuery(event.target.value); fetchSongs()}}
+                        onChange={(event) => { setQuery(event.target.value); fetchSongs() }}
                     />
                     <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
                         <ChevronDownIcon className="size-4 fill-black group-data-[hover]:fill-black" />
