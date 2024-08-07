@@ -22,6 +22,7 @@ export default function Home() {
     const [guess, setGuess] = useState();
     const [rowCategory, setRowCategory] = useState();
     const [colCategory, setColCategory] = useState();
+    const [guesses, setGuesses] = useState(9);
 
     const checkGuess = (guess) => {
         let newAnswer = answers[-1 + colCategory + (rowCategory - 1) * 3].answer
@@ -30,7 +31,7 @@ export default function Home() {
         } else {
             console.log('no, guessed ' + guess + ' coreect: ' + newAnswer)
         }
-        
+        setGuesses(guesses - 1)
     }
 
     return (
@@ -79,7 +80,7 @@ export default function Home() {
 
                         <div className="row-start-3 col-start-5 flex flex-col items-center justify-center text-center pl-20 h-full w-0 gap-2">
                             <div className="text-nowrap text-[16px]">Guesses left:</div>
-                            <div className="text-[16px] font-semibold">9</div>
+                            <div className="text-[16px] font-semibold">{guesses}</div>
                             <button className="text-nowrap bg-red-100 rounded-md transition-colors duration-200 transform
                                 hover:bg-red-300 pt-1 pb-1 px-2">give up?</button>
                         </div>
