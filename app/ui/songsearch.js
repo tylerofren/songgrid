@@ -6,7 +6,7 @@ import axios from 'axios'
 
 const songs2 = []
 
-export default function SongSearch() {
+export default function SongSearch({ onSelect }) {
     const [query, setQuery] = useState('')
     const [selected, setSelected] = useState({})
 
@@ -47,7 +47,7 @@ export default function SongSearch() {
 
     return (
         <div className="mx-auto h-full w-full pt-4">
-            <Combobox immediate value={selected} onChange={(value) => { setSelected(value) }} onClose={() => { setQuery(query); fetchSongs() }} __demoMode>
+            <Combobox immediate value={selected} onChange={(value) => { setSelected(value);console.log("selected + " + value.id);onSelect(value.id) }} onClose={() => { setQuery(query) }} __demoMode>
                 <div className="relative">
                     <ComboboxInput
                         spellCheck='false'
