@@ -10,7 +10,7 @@ export default function Home() {
 
     return (
         <div className="flex min-h-screen flex-col items-start justify-start p-14">
-            <div className="relative flex place-items-center text-slate-800 text-5xl font-semibold">
+            <div className="relative flex place-items-center text-slate-800 dark:text-slate-100 text-5xl font-semibold">
                 SongGrid
             </div>
 
@@ -20,7 +20,7 @@ export default function Home() {
                 
             </div>
 
-            <div className="">tylerofreneo@gmail.com</div>
+            <div className="underline"><a href="https://github.com/tylerofren" target="_blank">Github</a></div>
 
 
             {/* <div className="">
