@@ -12,7 +12,7 @@ export default function SongSearch({ onSelect }) {
 
     const fetchSongs = () => {
         axios
-            .get(`https://ws.audioscrobbler.com/2.0/?method=track.search&track=${query}&api_key=93b076b0e136a204f45a69292934aade&format=json`)
+            .get(`https://ws.audioscrobbler.com/2.0/?method=track.search&track=${query}&api_key=93b076b0e136a204f45a69292934aade&format=json&limit=10`)
             .then(response => {
                 console.log('searching w query ' + query)
 
