@@ -8,15 +8,15 @@ import { createPortal } from "react-dom";
 import axios from 'axios'
 
 const answers = [
-    { row: 1, column: 1, answer: 'Euphoria - Muse' },
-    { row: 1, column: 2, answer: ['euphoria - Kendrick Lamar', 'Euphoria - Muse'] },
-    { row: 1, column: 3, answer: 'euphoria - Kendrick Lamar' },
-    { row: 2, column: 1, answer: 'euphoria - Kendrick Lamar' },
-    { row: 2, column: 2, answer: 'euphoria - Kendrick Lamar' },
-    { row: 2, column: 3, answer: 'euphoria - Kendrick Lamar' },
-    { row: 3, column: 1, answer: 'euphoria - Kendrick Lamar' },
-    { row: 3, column: 2, answer: 'euphoria - Kendrick Lamar' },
-    { row: 3, column: 3, answer: 'euphoria - Kendrick Lamar' },
+    { row: 1, column: 1, answer: 'A Night To Remember - beabadoobee' },
+    { row: 1, column: 2, answer: 'Glue Song - beabadoobee' },
+    { row: 1, column: 3, answer: 'The Moon Song - beabadoobee' },
+    { row: 2, column: 1, answer: 'From The Start - Laufey' },
+    { row: 2, column: 2, answer: 'Sexy To Someone - Clairo' },
+    { row: 2, column: 3, answer: 'She Likes Another Boy - Oscar Lang' },
+    { row: 3, column: 1, answer: 'Falling Behind - Laufey' },
+    { row: 3, column: 2, answer: 'bubble gum - Clairo' },
+    { row: 3, column: 3, answer: 'fall into u - Oscar Lang' },
 ]
 
 export default function Home() {
@@ -45,6 +45,13 @@ export default function Home() {
     const [img7, setImg7] = useState("/images/willem.png");
     const [img8, setImg8] = useState("/images/willem.png");
     const [img9, setImg9] = useState("/images/willem.png");
+
+    const [row1] = useState("Artist: beabadoobee")
+    const [row2] = useState("Three or more word title")
+    const [row3] = useState("Double letter title")
+    const [col1] = useState("Artist: Laufey")
+    const [col2] = useState("Artist: Clairo")
+    const [col3] = useState("Artist: Oscar Lang")
 
     const checkGuess = (guess) => {
         let index = -1 + colCategory + (rowCategory - 1) * 3
@@ -91,8 +98,10 @@ export default function Home() {
         }
     }
 
+    // change to different api
+
     const getSongImage = (correctGuess, index) => {
-        
+
         let track = correctGuess.split(' - ')[0]
         let artist = correctGuess.split(' - ')[1]
         axios
@@ -132,6 +141,18 @@ export default function Home() {
             })
     }
 
+    const getRowCategory = () => {
+        if (rowCategory == 1) return row1
+        if (rowCategory == 2) return row2
+        if (rowCategory == 3) return row3
+    }
+
+    const getColCategory = () => {
+        if (colCategory == 1) return col1
+        if (colCategory == 2) return col2
+        if (colCategory == 3) return col3
+    }
+
     return (
         <div className="flex min-h-screen flex-col items-center justify-between p-14">
             <div className="relative flex place-items-center text-slate-800 text-5xl font-semibold">
@@ -140,55 +161,55 @@ export default function Home() {
             <div className="">
                 <main className="flex flex-col items-center relative text-[24x] w-[560px] h-[560px]">
                     <div className="grid grid-cols-[15%_25%_25%_25%_15%] grid-rows-[16%_28%_28%_28%] gap-0 w-full h-full text-[14px]">
-                        <div className="text-center row-start-1 col-start-2 pb-5 px-2 flex items-center justify-center"><button>short category1</button></div>
-                        <div className="text-center row-start-1 col-start-3 pb-5 px-2 flex items-center justify-center"><button>Long Category words words words2</button></div>
-                        <div className="text-center row-start-1 col-start-4 pb-5 px-2 flex items-center justify-center"><button>Long Category words words words3</button></div>
-                        <div className="text-center row-start-2 col-start-1 pr-9 px-2 flex items-center justify-center"><button>Long Category words words words4</button></div>
-                        <div className="text-center row-start-3 col-start-1 pr-9 px-2 flex items-center justify-center"><button>short5</button></div>
-                        <div className="text-center row-start-4 col-start-1 pr-9 px-2 flex items-center justify-center"><button>Longwordlong6</button></div>
+                        <div className="text-center row-start-1 col-start-2 pb-5 px-2 flex items-center justify-center"><button>{col1}</button></div>
+                        <div className="text-center row-start-1 col-start-3 pb-5 px-2 flex items-center justify-center"><button>{col2}</button></div>
+                        <div className="text-center row-start-1 col-start-4 pb-5 px-2 flex items-center justify-center"><button>{col3}</button></div>
+                        <div className="text-center row-start-2 col-start-1 pr-9 px-2 flex items-center justify-center"><button>{row1}</button></div>
+                        <div className="text-center row-start-3 col-start-1 pr-9 px-2 flex items-center justify-center"><button>{row2}</button></div>
+                        <div className="text-center row-start-4 col-start-1 pr-9 px-2 flex items-center justify-center"><button>{row3}</button></div>
 
                         <div className="row-start-2 col-start-2 border-t border-l border-neutral-500">
-                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg ? "cursor-pointer" : null)} onClick={() => { if(!showImg)setShowModal(!showModal); setRowCategory(1); setColCategory(1) }}>
+                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg ? "cursor-pointer" : null)} onClick={() => { if (!showImg) setShowModal(!showModal); setRowCategory(1); setColCategory(1) }}>
                                 {showImg && <Image src={img} fill={true} alt="Song picture" />}
                             </div>
                         </div>
                         <div className="row-start-2 col-start-3 border border-b-0 border-neutral-500">
-                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg2 ? "cursor-pointer" : null)} onClick={() => { if(!showImg2)setShowModal(!showModal), setRowCategory(1), setColCategory(2) }}>
+                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg2 ? "cursor-pointer" : null)} onClick={() => { if (!showImg2) setShowModal(!showModal), setRowCategory(1), setColCategory(2) }}>
                                 {showImg2 && <Image src={img2} fill={true} alt="Song picture" />}
                             </div>
                         </div>
                         <div className="row-start-2 col-start-4 border-t border-r border-neutral-500">
-                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg3 ? "cursor-pointer" : null)} onClick={() => { if(!showImg3)setShowModal(!showModal), setRowCategory(1), setColCategory(3) }}>
+                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg3 ? "cursor-pointer" : null)} onClick={() => { if (!showImg3) setShowModal(!showModal), setRowCategory(1), setColCategory(3) }}>
                                 {showImg3 && <Image src={img3} fill={true} alt="Song picture" />}
                             </div>
                         </div>
                         <div className="row-start-3 col-start-2 border border-r-0 border-neutral-500">
-                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg4 ? "cursor-pointer" : null)} onClick={() => { if(!showImg4)setShowModal(!showModal), setRowCategory(2), setColCategory(1) }}>
+                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg4 ? "cursor-pointer" : null)} onClick={() => { if (!showImg4) setShowModal(!showModal), setRowCategory(2), setColCategory(1) }}>
                                 {showImg4 && <Image src={img4} fill={true} alt="Song picture" />}
                             </div>
                         </div>
                         <div className="row-start-3 col-start-3 border border-neutral-500">
-                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg5 ? "cursor-pointer" : null)} onClick={() => { if(!showImg5)setShowModal(!showModal), setRowCategory(2), setColCategory(2) }}>
+                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg5 ? "cursor-pointer" : null)} onClick={() => { if (!showImg5) setShowModal(!showModal), setRowCategory(2), setColCategory(2) }}>
                                 {showImg5 && <Image src={img5} fill={true} alt="Song picture" />}
                             </div>
                         </div>
                         <div className="row-start-3 col-start-4 border border-l-0 border-neutral-500">
-                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg6 ? "cursor-pointer" : null)} onClick={() => { if(!showImg6)setShowModal(!showModal), setRowCategory(2), setColCategory(3) }}>
+                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg6 ? "cursor-pointer" : null)} onClick={() => { if (!showImg6) setShowModal(!showModal), setRowCategory(2), setColCategory(3) }}>
                                 {showImg6 && <Image src={img6} fill={true} alt="Song picture" />}
                             </div>
                         </div>
                         <div className="row-start-4 col-start-2 border-b border-l border-neutral-500">
-                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg7 ? "cursor-pointer" : null)} onClick={() => { if(!showImg7)setShowModal(!showModal), setRowCategory(3), setColCategory(1) }}>
+                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg7 ? "cursor-pointer" : null)} onClick={() => { if (!showImg7) setShowModal(!showModal), setRowCategory(3), setColCategory(1) }}>
                                 {showImg7 && <Image src={img7} fill={true} alt="Song picture" />}
                             </div>
                         </div>
                         <div className="row-start-4 col-start-3 border border-t-0 border-neutral-500">
-                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg8 ? "cursor-pointer" : null)} onClick={() => { if(!showImg8)setShowModal(!showModal), setRowCategory(3), setColCategory(2) }}>
+                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg8 ? "cursor-pointer" : null)} onClick={() => { if (!showImg8) setShowModal(!showModal), setRowCategory(3), setColCategory(2) }}>
                                 {showImg8 && <Image src={img8} fill={true} alt="Song picture" />}
                             </div>
                         </div>
                         <div className="row-start-4 col-start-4 border-b border-r border-neutral-500">
-                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg9 ? "cursor-pointer" : null)} onClick={() => { if(!showImg9)setShowModal(!showModal), setRowCategory(3), setColCategory(3) }}>
+                            <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg9 ? "cursor-pointer" : null)} onClick={() => { if (!showImg9) setShowModal(!showModal), setRowCategory(3), setColCategory(3) }}>
                                 {showImg9 && <Image src={img9} fill={true} alt="Song picture" />}
                             </div>
                         </div>
@@ -213,7 +234,7 @@ export default function Home() {
 
 
 
-            {showModal && createPortal(<Modal open={showModal} onGuess={(guess) => { setGuess(guess); setShowModal(false); console.log("got guess: " + guess); checkGuess(guess) }} onClose={() => setShowModal(false)}></Modal>, document.body)}
+            {showModal && createPortal(<Modal colCategory={getColCategory()} rowCategory={getRowCategory()} open={showModal} onGuess={(guess) => { setGuess(guess); setShowModal(false); console.log("got guess: " + guess); checkGuess(guess) }} onClose={() => setShowModal(false)}></Modal>, document.body)}
             {showLoseModal && createPortal(<LoseModal open={showLoseModal} onClose={() => setShowLoseModal(false)}></LoseModal>, document.body)}
         </div>
     );

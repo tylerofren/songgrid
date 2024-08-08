@@ -1,7 +1,7 @@
 import SongSearch from "./songsearch"
 import { useState } from 'react'
 
-export default function Modal({ onClose, onGuess }) {
+export default function Modal({ onClose, onGuess, colCategory, rowCategory}) {
     const [guess, setGuess] = useState('')
 
     return (
@@ -14,7 +14,7 @@ export default function Modal({ onClose, onGuess }) {
                             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
                                 <h3 className="text-base font-semibold leading-6 text-gray-900 flex justify-center" id="modal-title">Guess the song</h3>
                                 <div className="mt-2 flex justify-center pt-2">
-                                    <p className="text-sm text-gray-500">Category1 x Category2</p>
+                                    <p className="text-sm text-gray-500">{colCategory} x {rowCategory}</p>
                                 </div>
                                 <SongSearch onSelect={(query) => {setGuess(query); console.log("selected" + guess)}}></SongSearch>
                             </div>
