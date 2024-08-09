@@ -24,7 +24,7 @@ const nextConfig = {
         //     pathname: "/i/u/174s/",
         //   },
         // ],
-        domains: ["lastfm.freetls.fastly.net"],
+        domains: ["e-cdns-images.dzcdn.net"],
       },
   }
    

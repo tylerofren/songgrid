@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Modal from "./ui/modal";
 import LoseModal from "./ui/losemodal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import axios from 'axios'
 
@@ -20,8 +20,11 @@ const answers = [
 ]
 
 export default function Home() {
+    // didn't know you can make states with objects LOL
     const [showModal, setShowModal] = useState(false);
     const [guess, setGuess] = useState();
+    const [guessImage, setGuessImage] = useState("/images/willem.png")
+
     const [rowCategory, setRowCategory] = useState();
     const [colCategory, setColCategory] = useState();
     const [guesses, setGuesses] = useState(9);
@@ -47,47 +50,56 @@ export default function Home() {
     const [img9, setImg9] = useState("/images/willem.png");
 
     const [row1] = useState("Artist: beabadoobee")
-    const [row2] = useState("Three or more word title")
-    const [row3] = useState("Double letter title")
+    const [row2] = useState("Three or more\u00A0word title")
+    const [row3] = useState("Double letter\u00A0title")
     const [col1] = useState("Artist: Laufey")
     const [col2] = useState("Artist: Clairo")
     const [col3] = useState("Artist: Oscar Lang")
 
-    const checkGuess = (guess) => {
+    const checkGuess = (guess, img) => {
         let index = -1 + colCategory + (rowCategory - 1) * 3
         let newAnswer = answers[index].answer
         if (newAnswer.includes(guess)) {
             console.log('correct!!!s')
             switch (index + 1) {
                 case 1:
+                    setImg(img)
                     setShowImg(true);
                     break;
                 case 2:
+                    setImg2(img)
                     setShowImg2(true);
                     break;
                 case 3:
+                    setImg3(img)
                     setShowImg3(true);
                     break;
                 case 4:
+                    setImg4(img)
                     setShowImg4(true);
                     break;
                 case 5:
+                    setImg5(img)
                     setShowImg5(true);
                     break;
                 case 6:
+                    setImg6(img)
                     setShowImg6(true);
                     break;
                 case 7:
+                    setImg7(img)
                     setShowImg7(true);
                     break;
                 case 8:
+                    setImg8(img)
                     setShowImg8(true);
                     break;
                 case 9:
+                    setImg9(img)
                     setShowImg9(true);
                     break;
             }
-            getSongImage(guess, index)
+            // getSongImage(guess, index)
             if (showImg && showImg2 && showImg3 && showImg4 && showImg5 && showImg6 && showImg7 && showImg8 && showImg9) setShowLoseModal(true)
         } else {
             console.log('no, guessed ' + guess + ' coreect: ' + newAnswer)
@@ -98,8 +110,6 @@ export default function Home() {
         }
     }
 
-    // change to different api
-
     const getSongImage = (correctGuess, index) => {
 
         let track = correctGuess.split(' - ')[0]
@@ -107,8 +117,9 @@ export default function Home() {
         axios
             .get(`http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=93b076b0e136a204f45a69292934aade&artist=${artist}&track=${track}&format=json`)
             .then(response => {
-                let img = response.data.track.album.image[2]["#text"]
-                console.log(response.data.track.album.image[2]["#text"])
+                // let img = response.data.track.album.image[2]["#text"]
+                let img = guessImage;
+                //console.log(response.data.track.album.image[2]["#text"])
                 switch (index + 1) {
                     case 1:
                         setImg(img);
@@ -159,14 +170,14 @@ export default function Home() {
                 SongGrid
             </div>
             <div className="">
-                <main className="flex flex-col items-center relative text-[24x] w-[560px] h-[560px]">
-                    <div className="grid grid-cols-[15%_25%_25%_25%_15%] grid-rows-[16%_28%_28%_28%] gap-0 w-full h-full text-[14px]">
-                        <div className="text-center row-start-1 col-start-2 pb-5 px-2 flex items-center justify-center"><button>{col1}</button></div>
-                        <div className="text-center row-start-1 col-start-3 pb-5 px-2 flex items-center justify-center"><button>{col2}</button></div>
-                        <div className="text-center row-start-1 col-start-4 pb-5 px-2 flex items-center justify-center"><button>{col3}</button></div>
-                        <div className="text-center row-start-2 col-start-1 pr-9 px-2 flex items-center justify-center"><button>{row1}</button></div>
-                        <div className="text-center row-start-3 col-start-1 pr-9 px-2 flex items-center justify-center"><button>{row2}</button></div>
-                        <div className="text-center row-start-4 col-start-1 pr-9 px-2 flex items-center justify-center"><button>{row3}</button></div>
+                <main className="flex flex-col items-center relative text-[24x] w-[620px] h-[620px]">
+                    <div className="grid grid-cols-[12.5%_25%_25%_25%_12.5%] grid-rows-[16%_28%_28%_28%] gap-0 w-full h-full text-[14px]">
+                        <div className="text-center row-start-1 col-start-2 pb-1 px-2 flex items-center justify-center"><button>{col1}</button></div>
+                        <div className="text-center row-start-1 col-start-3 pb-1 px-2 flex items-center justify-center"><button>{col2}</button></div>
+                        <div className="text-center row-start-1 col-start-4 pb-1 px-2 flex items-center justify-center"><button>{col3}</button></div>
+                        <div className="text-center row-start-2 col-start-1 pr-2 px-2 flex items-center justify-center w-0"><button>{row1}</button></div>
+                        <div className="text-center row-start-3 col-start-1 pr-2 px-2 flex items-center justify-center w-0"><button>{row2}</button></div>
+                        <div className="text-center row-start-4 col-start-1 pr-2 px-2 flex items-center justify-center w-0"><button>{row3}</button></div>
 
                         <div className="row-start-2 col-start-2 border-t border-l border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg ? "cursor-pointer" : null)} onClick={() => { if (!showImg) setShowModal(!showModal); setRowCategory(1); setColCategory(1) }}>
@@ -222,7 +233,7 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="text-[14px] pt-4">Bottom main</div>
+                    <div className="text-[14px] pt-4">No search by artist!</div>
                 </main>
             </div>
 
@@ -234,7 +245,7 @@ export default function Home() {
 
 
 
-            {showModal && createPortal(<Modal colCategory={getColCategory()} rowCategory={getRowCategory()} open={showModal} onGuess={(guess) => { setGuess(guess); setShowModal(false); console.log("got guess: " + guess); checkGuess(guess) }} onClose={() => setShowModal(false)}></Modal>, document.body)}
+            {showModal && createPortal(<Modal colCategory={getColCategory()} rowCategory={getRowCategory()} open={showModal} onGuess={(guess, img) => { setShowModal(false); console.log("got guess: " + guess); console.log("setguessimg"); checkGuess(guess, img) }} onClose={() => setShowModal(false)}></Modal>, document.body)}
             {showLoseModal && createPortal(<LoseModal open={showLoseModal} onClose={() => setShowLoseModal(false)}></LoseModal>, document.body)}
         </div>
     );

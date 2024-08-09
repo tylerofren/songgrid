@@ -3,6 +3,7 @@ import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useDebouncedCallback } from 'use-debounce'
 
 const songs2 = []
 
@@ -10,44 +11,65 @@ export default function SongSearch({ onSelect }) {
     const [query, setQuery] = useState('')
     const [selected, setSelected] = useState({})
 
-    const fetchSongs = () => {
+    const filterSongs = () => {
+        return filteredSongs2.map((person) => (
+            <ComboboxOption
+                key={person.id}
+                value={person}
+                className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-white/10"
+            >
+                <CheckIcon className="invisible size-4 fill-black group-data-[selected]:visible" />
+                <div className="text-sm/6 text-black">{person.name}</div>
+            </ComboboxOption>
+        ))
+    }
+
+    const fetchSongs = (callback) => {
         axios
-            .get(`https://ws.audioscrobbler.com/2.0/?method=track.search&track=${query}&api_key=93b076b0e136a204f45a69292934aade&format=json&limit=10`)
+            .get(`https://api.deezer.com/search?q=${query}&order=RANKING`)
+            // .get(`https://ws.audioscrobbler.com/2.0/?method=track.search&track=${query}&api_key=93b076b0e136a204f45a69292934aade&format=json&limit=10`)
             .then(response => {
                 console.log('searching w query ' + query)
-
                 songs2.splice(0, songs2.length)
                 if (query != '') {
-                    let length = Object.keys(response.data.results.trackmatches.track).length
+                    let length = response.data.data.length
                     console.log('found ' + length)
+                    // TODO: restrict length to only loop over maximum MAX_TABLE_VIEW items
                     for (let i = 0; i < length; i++) {
-                        let name = response.data.results.trackmatches.track[i].name
-                        let artist = response.data.results.trackmatches.track[i].artist
+                        let name = response.data.data[i].title
+                        let artist = response.data.data[i].artist.name
                         songs2.push({
-                            id: name + ' - ' + artist, name: name + ' - ' + artist, artist: artist,
-                            searchtags: response.data.results.trackmatches.track[i].name + response.data.results.trackmatches.track[i].artist,
-                            searchtags2: artist + name
+                            id: response.data.data[i].id, name: name + ' - ' + artist, artist: artist,
+                            searchtags: name, // TODO: decide on searchtags to use, currently just name
+                            searchtags2: name,
+                            img: response.data.data[i].album.cover_medium
                         })
                     }
                 }
             })
+            callback();
     }
 
-    // On close modal, don't forget to clear songlist
-    fetchSongs()
+    useEffect(() => {
+        fetchSongs(filterSongs);
+    })
+
+    // TODO: On close modal, don't forget to clear songlist
+    // TODO: slight delay before search and load
 
     const filteredSongs2 =
         query === ''
-            ? songs2.splice(0, 8)
+            ? songs2.splice(0, 5)
             : songs2.filter((song) => {
                 return song.searchtags.toLowerCase().replace(/ +/g, "").includes(query.toLowerCase().replace(/ +/g, "")) ||
                     song.searchtags2.toLowerCase().replace(/ +/g, "").includes(query.toLowerCase().replace(/ +/g, ""))
-            }).slice(0, 8)
+            }).slice(0, 5)
 
 
     return (
         <div className="mx-auto h-full w-full pt-4">
-            <Combobox immediate value={selected} onChange={(value) => { setSelected(value);console.log("selected + " + value.id);onSelect(value.id) }} onClose={() => { setQuery(query) }} __demoMode>
+            {/* change here */}
+            <Combobox immediate value={selected} onChange={(value) => { setSelected(value); if(value!=null)console.log("selected + " + value.name); if(value!=null)onSelect(value.name, value.img) }} onClose={() => { setQuery(query) }} __demoMode>
                 <div className="relative">
                     <ComboboxInput
                         spellCheck='false'
@@ -56,7 +78,7 @@ export default function SongSearch({ onSelect }) {
                             'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
                         )}
                         displayValue={(person) => person?.name}
-                        onChange={(event) => { setQuery(event.target.value); fetchSongs() }}
+                        onChange={(event) => { setQuery(event.target.value);}}
                     />
                     <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
                         <ChevronDownIcon className="size-4 fill-black group-data-[hover]:fill-black" />
@@ -71,16 +93,7 @@ export default function SongSearch({ onSelect }) {
                         'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0 z-40'
                     )}
                 >
-                    {filteredSongs2.map((person) => (
-                        <ComboboxOption
-                            key={person.id}
-                            value={person}
-                            className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-white/10"
-                        >
-                            <CheckIcon className="invisible size-4 fill-black group-data-[selected]:visible" />
-                            <div className="text-sm/6 text-black">{person.name}</div>
-                        </ComboboxOption>
-                    ))}
+                    { filterSongs }
                 </ComboboxOptions>
             </Combobox>
         </div>
