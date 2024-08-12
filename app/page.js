@@ -5,7 +5,9 @@ import Modal from "./ui/modal";
 import LoseModal from "./ui/losemodal";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import axios from 'axios'
+import axios from 'axios';
+import { sql } from '@vercel/postgres';
+import { NextResponse } from 'next/server';
 
 const answers = [
     { row: 1, column: 1, answer: 'A Night To Remember - beabadoobee' },
@@ -56,11 +58,20 @@ export default function Home() {
     const [col2] = useState("Artist: Clairo")
     const [col3] = useState("Artist: Oscar Lang")
 
+    const addAnswer = (userid, grid, song) => {
+        let url = 'http://localhost:3000/api/add-answer?'
+        axios.get(url + `userid=${userid}&grid=${grid}&song=${song}`)
+             .then(response => {
+                console.log(response)
+             })
+    }
+
     const checkGuess = (guess, img) => {
         let index = -1 + colCategory + (rowCategory - 1) * 3
         let newAnswer = answers[index].answer
         if (newAnswer.includes(guess)) {
             console.log('correct!!!s')
+            addAnswer(20, index+1, guess)
             switch (index + 1) {
                 case 1:
                     setImg(img)
@@ -164,6 +175,20 @@ export default function Home() {
         if (colCategory == 3) return col3
     }
 
+    const getNumCorrect = () => {
+        let answer = 0;
+        if (showImg) answer++;
+        if (showImg2) answer++;
+        if (showImg3) answer++;
+        if (showImg4) answer++;
+        if (showImg5) answer++;
+        if (showImg6) answer++;
+        if (showImg7) answer++;
+        if (showImg8) answer++;
+        if (showImg9) answer++;
+        return answer;
+    }
+
     return (
         <div className="flex min-h-screen flex-col items-center justify-between p-14">
             <div className="relative flex place-items-center text-slate-800 text-5xl font-semibold">
@@ -246,7 +271,7 @@ export default function Home() {
 
 
             {showModal && createPortal(<Modal colCategory={getColCategory()} rowCategory={getRowCategory()} open={showModal} onGuess={(guess, img) => { setShowModal(false); console.log("got guess: " + guess); console.log("setguessimg"); checkGuess(guess, img) }} onClose={() => setShowModal(false)}></Modal>, document.body)}
-            {showLoseModal && createPortal(<LoseModal open={showLoseModal} onClose={() => setShowLoseModal(false)}></LoseModal>, document.body)}
+            {showLoseModal && createPortal(<LoseModal open={showLoseModal} onClose={() => setShowLoseModal(false)} getCorrect={getNumCorrect()}></LoseModal>, document.body)}
         </div>
     );
 }
