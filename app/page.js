@@ -61,9 +61,9 @@ export default function Home() {
     const addAnswer = (userid, grid, song) => {
         let url = 'http://localhost:3000/api/add-answer?'
         axios.get(url + `userid=${userid}&grid=${grid}&song=${song}`)
-             .then(response => {
+            .then(response => {
                 console.log(response)
-             })
+            })
     }
 
     const checkGuess = (guess, img) => {
@@ -71,7 +71,7 @@ export default function Home() {
         let newAnswer = answers[index].answer
         if (newAnswer.includes(guess)) {
             console.log('correct!!!s')
-            addAnswer(20, index+1, guess)
+            addAnswer(20, index + 1, guess)
             switch (index + 1) {
                 case 1:
                     setImg(img)
@@ -207,46 +207,82 @@ export default function Home() {
                         <div className="row-start-2 col-start-2 border-t border-l border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg ? "cursor-pointer" : null)} onClick={() => { if (!showImg) setShowModal(!showModal); setRowCategory(1); setColCategory(1) }}>
                                 {showImg && <Image src={img} fill={true} alt="Song picture" />}
+                                {showImg &&
+                                    <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
+                                        <div className="relative text-center font-medium">100%</div>
+                                    </div>}
                             </div>
                         </div>
                         <div className="row-start-2 col-start-3 border border-b-0 border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg2 ? "cursor-pointer" : null)} onClick={() => { if (!showImg2) setShowModal(!showModal), setRowCategory(1), setColCategory(2) }}>
                                 {showImg2 && <Image src={img2} fill={true} alt="Song picture" />}
+                                {showImg2 &&
+                                    <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
+                                        <div className="relative text-center font-medium">100%</div>
+                                    </div>}
                             </div>
                         </div>
                         <div className="row-start-2 col-start-4 border-t border-r border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg3 ? "cursor-pointer" : null)} onClick={() => { if (!showImg3) setShowModal(!showModal), setRowCategory(1), setColCategory(3) }}>
                                 {showImg3 && <Image src={img3} fill={true} alt="Song picture" />}
+                                {showImg3 &&
+                                    <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
+                                        <div className="relative text-center font-medium">100%</div>
+                                    </div>}
                             </div>
                         </div>
                         <div className="row-start-3 col-start-2 border border-r-0 border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg4 ? "cursor-pointer" : null)} onClick={() => { if (!showImg4) setShowModal(!showModal), setRowCategory(2), setColCategory(1) }}>
                                 {showImg4 && <Image src={img4} fill={true} alt="Song picture" />}
+                                {showImg4 &&
+                                    <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
+                                        <div className="relative text-center font-medium">100%</div>
+                                    </div>}
                             </div>
                         </div>
                         <div className="row-start-3 col-start-3 border border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg5 ? "cursor-pointer" : null)} onClick={() => { if (!showImg5) setShowModal(!showModal), setRowCategory(2), setColCategory(2) }}>
                                 {showImg5 && <Image src={img5} fill={true} alt="Song picture" />}
+                                {showImg5 &&
+                                    <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
+                                        <div className="relative text-center font-medium">100%</div>
+                                    </div>}
                             </div>
                         </div>
                         <div className="row-start-3 col-start-4 border border-l-0 border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg6 ? "cursor-pointer" : null)} onClick={() => { if (!showImg6) setShowModal(!showModal), setRowCategory(2), setColCategory(3) }}>
                                 {showImg6 && <Image src={img6} fill={true} alt="Song picture" />}
+                                {showImg6 &&
+                                    <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
+                                        <div className="relative text-center font-medium">100%</div>
+                                    </div>}
                             </div>
                         </div>
                         <div className="row-start-4 col-start-2 border-b border-l border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg7 ? "cursor-pointer" : null)} onClick={() => { if (!showImg7) setShowModal(!showModal), setRowCategory(3), setColCategory(1) }}>
                                 {showImg7 && <Image src={img7} fill={true} alt="Song picture" />}
+                                {showImg7 &&
+                                    <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
+                                        <div className="relative text-center font-medium">100%</div>
+                                    </div>}
                             </div>
                         </div>
                         <div className="row-start-4 col-start-3 border border-t-0 border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg8 ? "cursor-pointer" : null)} onClick={() => { if (!showImg8) setShowModal(!showModal), setRowCategory(3), setColCategory(2) }}>
                                 {showImg8 && <Image src={img8} fill={true} alt="Song picture" />}
+                                {showImg8 &&
+                                    <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
+                                        <div className="relative text-center font-medium">100%</div>
+                                    </div>}
                             </div>
                         </div>
                         <div className="row-start-4 col-start-4 border-b border-r border-neutral-500">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg9 ? "cursor-pointer" : null)} onClick={() => { if (!showImg9) setShowModal(!showModal), setRowCategory(3), setColCategory(3) }}>
                                 {showImg9 && <Image src={img9} fill={true} alt="Song picture" />}
+                                {showImg9 &&
+                                    <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
+                                        <div className="relative text-center font-medium">100%</div>
+                                    </div>}
                             </div>
                         </div>
 
