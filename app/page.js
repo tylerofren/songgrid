@@ -8,6 +8,7 @@ import { createPortal } from "react-dom";
 import axios from 'axios';
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
+import { useCookies } from 'next-client-cookies';
 
 const answers = [
     { row: 1, column: 1, answer: 'A Night To Remember - beabadoobee' },
@@ -22,6 +23,15 @@ const answers = [
 ]
 
 export default function Home() {
+    const cookies = useCookies();
+    useEffect(() => {
+        cookies.set({
+            'id': crypto.randomUUID(),
+            'setImg': false
+        });
+    }, [])
+
+
     // didn't know you can make states with objects LOL
     const [showModal, setShowModal] = useState(false);
     const [guess, setGuess] = useState();
@@ -30,7 +40,7 @@ export default function Home() {
     const [rowCategory, setRowCategory] = useState();
     const [colCategory, setColCategory] = useState();
     const [guesses, setGuesses] = useState(9);
-    const [showImg, setShowImg] = useState(false);
+    const [showImg, setShowImg] = useState(cookies.get('setImg'));
     const [showImg2, setShowImg2] = useState(false);
     const [showImg3, setShowImg3] = useState(false);
     const [showImg4, setShowImg4] = useState(false);
@@ -58,6 +68,10 @@ export default function Home() {
     const [col2] = useState("Artist: Clairo")
     const [col3] = useState("Artist: Oscar Lang")
 
+    
+    //
+
+
     const addAnswer = (userid, grid, song) => {
         let url = 'http://localhost:3000/api/add-answer?'
         axios.get(url + `userid=${userid}&grid=${grid}&song=${song}`)
@@ -66,16 +80,18 @@ export default function Home() {
             })
     }
 
+
     const checkGuess = (guess, img) => {
         let index = -1 + colCategory + (rowCategory - 1) * 3
         let newAnswer = answers[index].answer
         if (newAnswer.includes(guess)) {
             console.log('correct!!!s')
-            addAnswer(20, index + 1, guess)
+            addAnswer(cookies.get('id'), index + 1, guess)
             switch (index + 1) {
                 case 1:
                     setImg(img)
                     setShowImg(true);
+                    //cookies.set('setImg', true)
                     break;
                 case 2:
                     setImg2(img)
