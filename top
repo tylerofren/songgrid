@@ -1,0 +1,101 @@
+[33mcommit 02e45687003135c4a9412329a94ee0725f91304c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelopment[m[33m, [m[1;31morigin/development[m[33m)[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Sun Aug 25 19:02:14 2024 -0700
+
+    dej
+
+[33mcommit 74eb2344863781ea8ee8641860d398ee60ab2e59[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Sun Aug 25 18:55:33 2024 -0700
+
+    cookies test
+
+[33mcommit 75dbf0906af8b32d318ce82b6a250e39ccfc914d[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Mon Aug 12 00:08:07 2024 -0700
+
+    added static percentage
+
+[33mcommit d618f222d807a73cfb8a5f9256c53be1fccb2eb4[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Sun Aug 11 22:40:28 2024 -0700
+
+    added stuff i guess
+
+[33mcommit fcf2896ed32dfdfa664a0199ec937a17bda10acf[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Thu Aug 8 22:03:06 2024 -0700
+
+    changed api, works better i think
+
+[33mcommit 501e0bd39a137605cc5338f8981bbc4495732185[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Thu Aug 8 00:40:11 2024 -0700
+
+    add pictures, but no good!
+
+[33mcommit 8a6f11e8f5277f2fb8a3901eb48dacdd07c35f2b[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Wed Aug 7 23:40:42 2024 -0700
+
+    Working mostly i think yay
+
+[33mcommit a3a8ad6fd841cf1864039244c90f1d36ba21ee05[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Wed Aug 7 00:03:01 2024 -0700
+
+    guesses change number
+
+[33mcommit c0d27ae2a589b41ed6e3f592ed571b918df4c8f3[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Tue Aug 6 23:47:17 2024 -0700
+
+    implement guess check
+
+[33mcommit 5a10b4b78700b503a13016ae44f7d5520d4bf42b[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Tue Aug 6 21:58:35 2024 -0700
+
+    fix search parameters
+
+[33mcommit 8cb29c14f8933a397ce71674d33cdd1b644bf8e7[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Tue Aug 6 19:38:47 2024 -0700
+
+    scuffed but functional song search
+
+[33mcommit c9637893cbf9f22afb1c144b7587cb185d3cc862[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Tue Aug 6 00:41:31 2024 -0700
+
+    scuffed song search
+
+[33mcommit e9d69c2cdf1f6c7529737bc88014f04dc872a242[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Mon Aug 5 22:14:05 2024 -0700
+
+    smth
+
+[33mcommit fce3809e7b104d696cf089be45ef95e631a1b226[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Mon Aug 5 22:10:51 2024 -0700
+
+    Added stuff
+
+[33mcommit 05daf361468773b6f347b2eb03b69aa2b8ca9cfb[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Sun Aug 4 21:44:57 2024 -0700
+
+    Added basic ui functionality
+
+[33mcommit 737b5f73085837831b39f977dd4d10999f0e1679[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Tue Jul 30 21:37:17 2024 -0700
+
+    Fix formatting
+
+[33mcommit 8d1254daacefb243d76fcf96f0036c24990be31b[m
+Author: Tyler Ofreneo <tylerofreneo@gmail.com>
+Date:   Tue Jul 30 21:31:50 2024 -0700
+
+    Initial commit from Create Next App
