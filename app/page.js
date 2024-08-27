@@ -8,6 +8,8 @@ import { createPortal } from "react-dom";
 import axios from 'axios';
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
+import { createPool } from '@vercel/postgres';
+import { revalidatePath } from "next/cache";
 
 const answers = [
     { row: 1, column: 1, answer: 'A Night To Remember - beabadoobee' },
@@ -50,7 +52,7 @@ export default function Home() {
     const [img7, setImg7] = useState("/images/willem.png");
     const [img8, setImg8] = useState("/images/willem.png");
     const [img9, setImg9] = useState("/images/willem.png");
-    
+
     const [per, setPer] = useState("100%")
     const [per2, setPer2] = useState("100%")
     const [per3, setPer3] = useState("100%")
@@ -211,10 +213,14 @@ export default function Home() {
     }
 
     const getGridPercentageByGuess = (grid, guess) => {
-        let percentage = answers2.data.result.rows.find((element) => {element.grid == grid && element.song == guess})
-        if(percentage == undefined) percentage = 100
-        console.log(percentage)
         console.log(answers2.data.result.rows)
+        console.log("grid: " + grid) 
+        console.log("guess: " + guess)
+        let percentage = answers2.data.result.rows.find((element) =>  element.grid === grid && element.song == guess)
+        if (percentage == undefined) percentage = 100
+        else percentage = Math.ceil(percentage.viewpercentage * 100)
+        console.log(percentage)
+        // console.log(answers2.data.result.rows)
         return `${percentage}%`
     }
 
@@ -222,6 +228,7 @@ export default function Home() {
         let url = 'http://localhost:3000/api/get-answers'
         axios.get(url)
             .then(response => {
+                console.log(response)
                 setAnswers2(response);
             })
             .catch(error => {

@@ -2,6 +2,7 @@ import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
+    console.log(request.url)
     try {
         const result =
             await sql`SELECT COUNT(userid), grid, song, COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY grid) as ViewPercentage
