@@ -50,13 +50,25 @@ export default function Home() {
     const [img7, setImg7] = useState("/images/willem.png");
     const [img8, setImg8] = useState("/images/willem.png");
     const [img9, setImg9] = useState("/images/willem.png");
+    
+    const [per, setPer] = useState("100%")
+    const [per2, setPer2] = useState("100%")
+    const [per3, setPer3] = useState("100%")
+    const [per4, setPer4] = useState("100%")
+    const [per5, setPer5] = useState("100%")
+    const [per6, setPer6] = useState("100%")
+    const [per7, setPer7] = useState("100%")
+    const [per8, setPer8] = useState("100%")
+    const [per9, setPer9] = useState("100%")
 
-    const [row1] = useState("Artist: beabadoobee")
+    const [row1] = useState("Artist: beabadoobee") // ??? why use state
     const [row2] = useState("Three or more\u00A0word title")
     const [row3] = useState("Double letter\u00A0title")
     const [col1] = useState("Artist: Laufey")
     const [col2] = useState("Artist: Clairo")
     const [col3] = useState("Artist: Oscar Lang")
+
+    const [answers2, setAnswers2] = useState([]);
 
     const addAnswer = (userid, grid, song) => {
         let url = 'http://localhost:3000/api/add-answer?'
@@ -74,38 +86,47 @@ export default function Home() {
             addAnswer(20, index + 1, guess)
             switch (index + 1) {
                 case 1:
+                    setPer(getGridPercentageByGuess(1, guess))
                     setImg(img)
                     setShowImg(true);
                     break;
                 case 2:
+                    setPer2(getGridPercentageByGuess(2, guess))
                     setImg2(img)
                     setShowImg2(true);
                     break;
                 case 3:
+                    setPer3(getGridPercentageByGuess(3, guess))
                     setImg3(img)
                     setShowImg3(true);
                     break;
                 case 4:
+                    setPer4(getGridPercentageByGuess(4, guess))
                     setImg4(img)
                     setShowImg4(true);
                     break;
                 case 5:
+                    setPer5(getGridPercentageByGuess(5, guess))
                     setImg5(img)
                     setShowImg5(true);
                     break;
                 case 6:
+                    setPer6(getGridPercentageByGuess(6, guess))
                     setImg6(img)
                     setShowImg6(true);
                     break;
                 case 7:
+                    setPer7(getGridPercentageByGuess(7, guess))
                     setImg7(img)
                     setShowImg7(true);
                     break;
                 case 8:
+                    setPer8(getGridPercentageByGuess(8, guess))
                     setImg8(img)
                     setShowImg8(true);
                     break;
                 case 9:
+                    setPer9(getGridPercentageByGuess(9, guess))
                     setImg9(img)
                     setShowImg9(true);
                     break;
@@ -189,6 +210,28 @@ export default function Home() {
         return answer;
     }
 
+    const getGridPercentageByGuess = (grid, guess) => {
+        let percentage = answers2.data.result.rows.find((element) => {element.grid == grid && element.song == guess})
+        if(percentage == undefined) percentage = 100
+        console.log(percentage)
+        console.log(answers2.data.result.rows)
+        return `${percentage}%`
+    }
+
+    const getAnswers = () => {
+        let url = 'http://localhost:3000/api/get-answers'
+        axios.get(url)
+            .then(response => {
+                setAnswers2(response);
+            })
+            .catch(error => {
+                console.log('Error fetching answers' + error)
+            })
+    }
+    useEffect(() => {
+        getAnswers();
+    }, [])
+
     return (
         <div className="flex min-h-screen flex-col items-center justify-between p-14">
             <div className="relative flex place-items-center text-slate-800 text-5xl font-semibold">
@@ -209,7 +252,7 @@ export default function Home() {
                                 {showImg && <Image src={img} fill={true} alt="Song picture" />}
                                 {showImg &&
                                     <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
-                                        <div className="relative text-center font-medium">100%</div>
+                                        <div className="relative text-center font-medium">{per}</div>
                                     </div>}
                             </div>
                         </div>
@@ -218,7 +261,7 @@ export default function Home() {
                                 {showImg2 && <Image src={img2} fill={true} alt="Song picture" />}
                                 {showImg2 &&
                                     <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
-                                        <div className="relative text-center font-medium">100%</div>
+                                        <div className="relative text-center font-medium">{per2}</div>
                                     </div>}
                             </div>
                         </div>
@@ -227,7 +270,7 @@ export default function Home() {
                                 {showImg3 && <Image src={img3} fill={true} alt="Song picture" />}
                                 {showImg3 &&
                                     <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
-                                        <div className="relative text-center font-medium">100%</div>
+                                        <div className="relative text-center font-medium">{per3}</div>
                                     </div>}
                             </div>
                         </div>
@@ -236,7 +279,7 @@ export default function Home() {
                                 {showImg4 && <Image src={img4} fill={true} alt="Song picture" />}
                                 {showImg4 &&
                                     <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
-                                        <div className="relative text-center font-medium">100%</div>
+                                        <div className="relative text-center font-medium">{per4}</div>
                                     </div>}
                             </div>
                         </div>
@@ -245,7 +288,7 @@ export default function Home() {
                                 {showImg5 && <Image src={img5} fill={true} alt="Song picture" />}
                                 {showImg5 &&
                                     <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
-                                        <div className="relative text-center font-medium">100%</div>
+                                        <div className="relative text-center font-medium">{per5}</div>
                                     </div>}
                             </div>
                         </div>
@@ -254,7 +297,7 @@ export default function Home() {
                                 {showImg6 && <Image src={img6} fill={true} alt="Song picture" />}
                                 {showImg6 &&
                                     <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
-                                        <div className="relative text-center font-medium">100%</div>
+                                        <div className="relative text-center font-medium">{per6}</div>
                                     </div>}
                             </div>
                         </div>
@@ -263,7 +306,7 @@ export default function Home() {
                                 {showImg7 && <Image src={img7} fill={true} alt="Song picture" />}
                                 {showImg7 &&
                                     <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
-                                        <div className="relative text-center font-medium">100%</div>
+                                        <div className="relative text-center font-medium">{per7}</div>
                                     </div>}
                             </div>
                         </div>
@@ -272,7 +315,7 @@ export default function Home() {
                                 {showImg8 && <Image src={img8} fill={true} alt="Song picture" />}
                                 {showImg8 &&
                                     <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
-                                        <div className="relative text-center font-medium">100%</div>
+                                        <div className="relative text-center font-medium">{per8}</div>
                                     </div>}
                             </div>
                         </div>
@@ -281,7 +324,7 @@ export default function Home() {
                                 {showImg9 && <Image src={img9} fill={true} alt="Song picture" />}
                                 {showImg9 &&
                                     <div className="bg-neutral-100 relative w-[30%] rounded-br border-r border-b">
-                                        <div className="relative text-center font-medium">100%</div>
+                                        <div className="relative text-center font-medium">{per9}</div>
                                     </div>}
                             </div>
                         </div>
