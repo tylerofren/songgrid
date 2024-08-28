@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Image from "next/image";
 
 let nextId = 0; // ? makes happy i guess
 
 export default function LoseModal({ onClose, getCorrect }) {
-    const [answers, setAnswers] = useState([]);
+    const [topAnswers, setTopAnswers] = useState([]);
+    const [botAnswers, setBotAnswers] = useState([]);
 
-    const getAnswers = () => {
-        let url = 'http://localhost:3000/api/get-answers'
+    const getTopAnswers = () => {
+        let url = 'http://localhost:3000/api/get-top-answers'
         axios.get(url)
             .then(response => {
                 console.log(response.data.result.rows)
@@ -15,16 +17,36 @@ export default function LoseModal({ onClose, getCorrect }) {
                     id: nextId++,
                     grid: row.grid,
                     song: row.song,
-                    viewpercentage: row.viewpercentage
+                    viewpercentage: Math.ceil(row.viewpercentage * 100),
+                    img: row.img
                 }));
-                setAnswers(newAnswers);
+                setTopAnswers(newAnswers);
+            })
+            .catch(error => {
+                console.log('Error fetching answers' + error)
+            })
+    }
+    const getBotAnswers = () => {
+        let url = 'http://localhost:3000/api/get-bot-answers'
+        axios.get(url)
+            .then(response => {
+                console.log(response.data.result.rows)
+                const newAnswers = response.data.result.rows.map(row => ({
+                    id: nextId++,
+                    grid: row.grid,
+                    song: row.song,
+                    viewpercentage: Math.ceil(row.viewpercentage * 100),
+                    img: row.img
+                }));
+                setBotAnswers(newAnswers);
             })
             .catch(error => {
                 console.log('Error fetching answers' + error)
             })
     }
     useEffect(() => {
-        getAnswers();
+        getTopAnswers();
+        getBotAnswers();
     }, [])
 
     return (
@@ -36,13 +58,46 @@ export default function LoseModal({ onClose, getCorrect }) {
                         <div className="sm:flex sm:items-start justify-center items-center">
                             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
                                 <div className="mt-2 flex flex-col justify-center pt-2">
-                                    <p className="text-sm text-center text-gray-500">You got { getCorrect } / 9 correct</p>
-                                    <div>Statistics:
+                                    <p className="text-sm text-center text-gray-500">You got {getCorrect} / 9 correct !</p>
+                                    {/* <div>Statistics:
                                         <ul>
-                                        {answers.map(answer => (
-                                            <li key={answer.id}>{answer.grid} : {answer.song} : {answer.viewpercentage}</li>
-                                        ))}
+                                            {topAnswers.map(answer => (
+                                                <li key={answer.id}>{answer.grid} : {answer.song} : {answer.viewpercentage}%</li>
+                                            ))}
+                                            {botAnswers.map(answer => (
+                                                <li key={answer.id}>{answer.grid} : {answer.song} : {answer.viewpercentage}%</li>
+                                            ))}
                                         </ul>
+                                    </div> */}
+                                    <div className="text-center pt-2">Most Popular Correct Guesses</div>
+                                    <div className="flex justify-center pt-2">
+                                        <div className="grid w-64 h-64 border">
+                                            {topAnswers.map(answer => (
+                                                <div className={"row-start-" + Math.ceil(answer.grid / 3) + " col-start-" + answer.grid % 3}>
+                                                    <div className="w-full h-full block bg-modal relative border">
+                                                        <Image src={"/" + answer.img} fill={true} alt="Song picture" />
+                                                        <div className="bg-neutral-100 absolute w-[30%] rounded-br border-r border-b">
+                                                            <div className="relative text-center font-medium text-[10px]">{answer.viewpercentage}%</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="text-center pt-2">Rarest Correct Guesses</div>
+                                    <div className="flex justify-center pt-2">
+                                        <div className="grid w-64 h-64 border">
+                                            {botAnswers.map(answer => (
+                                                <div className={"row-start-" + Math.ceil(answer.grid / 3) + " col-start-" + answer.grid % 3}>
+                                                    <div className="w-full h-full block bg-modal relative border">
+                                                        <Image src={"/" + answer.img} fill={true} alt="Song picture" />
+                                                        <div className="bg-neutral-100 absolute w-[30%] rounded-br border-r border-b">
+                                                            <div className="relative text-center font-medium text-[10px]">{answer.viewpercentage}%</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

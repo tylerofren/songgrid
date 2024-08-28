@@ -72,9 +72,9 @@ export default function Home() {
 
     const [answers2, setAnswers2] = useState([]);
 
-    const addAnswer = (userid, grid, song) => {
+    const addAnswer = (userid, grid, song, img) => {
         let url = 'http://localhost:3000/api/add-answer?'
-        axios.get(url + `userid=${userid}&grid=${grid}&song=${song}`)
+        axios.get(url + `userid=${userid}&grid=${grid}&song=${song}&img=${img}`)
             .then(response => {
                 console.log(response)
             })
@@ -85,7 +85,7 @@ export default function Home() {
         let newAnswer = answers[index].answer
         if (newAnswer.includes(guess)) {
             console.log('correct!!!s')
-            addAnswer(20, index + 1, guess)
+            addAnswer(20, index + 1, guess, img)
             switch (index + 1) {
                 case 1:
                     setPer(getGridPercentageByGuess(1, guess))

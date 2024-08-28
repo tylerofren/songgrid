@@ -6,11 +6,12 @@ export async function GET(request) {
     const userid = searchParams.get('userid');
     const grid = searchParams.get('grid');
     const song = searchParams.get('song');
+    const img = searchParams.get('img');
 
     try {
-        if (!userid || !grid || !song) throw new Error('userid & grid & song required');
-        await sql`INSERT INTO Answers (userid, grid, song) 
-                  VALUES (${userid}, ${grid}, ${song});`;
+        if (!userid || !grid || !song || !img) throw new Error('userid & grid & song & img required');
+        await sql`INSERT INTO Answers (userid, grid, song, img) 
+                  VALUES (${userid}, ${grid}, ${song}, ${img});`;
     } catch (error) {
         return NextResponse.json({ error }, { status: 500 });
     }
