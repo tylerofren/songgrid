@@ -101,7 +101,7 @@ export default function Home() {
     const [answers2, setAnswers2] = useState([]);
 
     const addAnswer = (userid, grid, song, img) => {
-        let url = 'http://localhost:3000/api/add-answer?'
+        let url = 'https://songgrids.vercel.app/api/add-answer?'
         axios.get(url + `userid=${userid}&grid=${grid}&song=${song}&img=${img}`)
             .then(response => {
                 console.log(response)
@@ -253,7 +253,7 @@ export default function Home() {
     }
 
     const getAnswers = () => {
-        let url = 'http://localhost:3000/api/get-answers'
+        let url = 'https://songgrids.vercel.app/api/get-answers'
         axios.get(url)
             .then(response => {
                 console.log(response)

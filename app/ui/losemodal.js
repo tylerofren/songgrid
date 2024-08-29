@@ -9,7 +9,7 @@ export default function LoseModal({ onClose, getCorrect }) {
     const [botAnswers, setBotAnswers] = useState([]);
 
     const getTopAnswers = () => {
-        let url = 'http://localhost:3000/api/get-top-answers'
+        let url = 'https://songgrids.vercel.app/api/get-top-answers'
         axios.get(url)
             .then(response => {
                 console.log(response.data.result.rows)
@@ -27,7 +27,7 @@ export default function LoseModal({ onClose, getCorrect }) {
             })
     }
     const getBotAnswers = () => {
-        let url = 'http://localhost:3000/api/get-bot-answers'
+        let url = 'https://songgrids.vercel.app/api/get-bot-answers'
         axios.get(url)
             .then(response => {
                 console.log(response.data.result.rows)
