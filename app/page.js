@@ -12,15 +12,43 @@ import { createPool } from '@vercel/postgres';
 import { revalidatePath } from "next/cache";
 
 const answers = [
-    { row: 1, column: 1, answer: 'A Night To Remember - beabadoobee' },
-    { row: 1, column: 2, answer: 'Glue Song - beabadoobee' },
-    { row: 1, column: 3, answer: 'The Moon Song - beabadoobee' },
-    { row: 2, column: 1, answer: 'From The Start - Laufey' },
-    { row: 2, column: 2, answer: 'Sexy To Someone - Clairo' },
-    { row: 2, column: 3, answer: 'She Likes Another Boy - Oscar Lang' },
-    { row: 3, column: 1, answer: 'Falling Behind - Laufey' },
-    { row: 3, column: 2, answer: 'bubble gum - Clairo' },
-    { row: 3, column: 3, answer: 'fall into u - Oscar Lang' },
+    { row: 1, column: 1, answer: ['FourFiveSeconds - Rihanna', 'Run This Town - JAY-Z', 'Diamonds - Rihanna', 'Diamonds (Remix) - Rihanna'] },
+    { row: 1, column: 2, answer: ['Take Care - Drake', 'Too Good - Drake', 'What\'s My Name? (Album Version) - Rihanna','Work - Rihanna'] },
+    { row: 1, column: 3, answer: ['Love The Way You Lie - Eminem', 'The Monster - Eminem','Love The Way You Lie (Part II) (Pt. 2) - Rihanna'] },
+    { row: 2, column: 1, answer: ['Jail - Kanye West','Ultralight Beam - Kanye West','Famous - Kanye West','All Day - Kanye West','Bound 2 - Kanye West',
+    'Ni**as in Paris - JAY-Z','No Church In The Wild - JAY-Z','Mercy - Kanye West','All Of The Lights - Kanye West','POWER - Kanye West',
+    'Run This Town - JAY-Z','Amazing - Kanye West','American Boy - Estelle','Swagga Like Us - T.I.','Good Life - Kanye West',
+    'Stronger - Kanye West','Can\'t Tell Me Nothing - Kanye West','Diamonds From Sierra Leone (Bonus Track) - Kanye West','Gold Digger - Kanye West',
+    'Jesus Walks - Kanye West','You Don\'t Know My Name - Alicia Keys','Through The Wire - Kanye West','Slow Jamz (feat. Kanye West & Jamie Foxx) - Twista'
+    ] },
+    { row: 2, column: 2, answer: [
+        'Rich Flex - Drake','Spin Bout U - Drake','WAIT FOR U (feat. Drake & Tems) - Future','Churchill Downs (feat. Drake) - Jack Harlow',
+        'Laugh Now Cry Later - Drake','Gold Roses (feat. Drake) - Rick Ross','No Guidance (feat. Drake) - Chris Brown','God\'s Plan - Drake',
+        'SICKO MODE - Travis Scott','Nice For What - Drake','Hotline Bling - Drake','Pop Style - Drake','Come and See Me (feat. Drake) - PARTYNEXTDOOR',
+        'Work - Rihanna','Truffle Butter - Nicki Minaj','Back To Back - Drake','0 To 100 / The Catch Up - Drake','Started From the Bottom (Explicit Version) - Drake',
+        'The Motto - Drake','HYFR (Hell Ya Fucking Right) - Drake','HYFR (Hell Ya F***ing Right) - Drake','What\'s My Name? (Album Version) - Rihanna',
+        'Fancy - Drake','Best I Ever Had - Drake'
+    ] },
+    { row: 2, column: 3, answer: [
+        'Lucky You - Eminem','Rap God - Eminem','The Monster - Eminem','Berzerk - Eminem','Not Afraid - Eminem','Love The Way You Lie - Eminem',
+        'Airplanes, Pt. II (feat. Eminem & Hayley Williams of Paramore) - B.o.B','Crack A Bottle - Eminem','Shake That - Eminem',
+        'Mockingbird - Eminem','Just Lose It - Eminem','Lose Yourself - Eminem','Without Me - Eminem','The Real Slim Shady - Eminem',
+        'Guilty Conscience 2 - Eminem','My Name Is - Eminem'
+    ] },
+    { row: 3, column: 1, answer: [
+        'We Don\'t Care - Kanye West','Graduation Day - Kanye West','All Falls Down - Kanye West','I\'ll Fly Away - Kanye West','Spaceship - Kanye West',
+        'Jesus Walks - Kanye West','Never Let Me Down - Kanye West','Get Em High - Kanye West','The New Workout Plan - Kanye West','Breathe In Breathe Out - Kanye West',
+        'School Spirit - Kanye West','Two Words - Kanye West','Through The Wire - Kanye West','Family Business - Kanye West','Last Call - Kanye West'
+    ]},
+    { row: 3, column: 2, answer: [
+        'Lust For Life - Drake','Houstatlantavegas - Drake','Let\'s Call It Off - Drake','November 18th - Drake','Ignant Shit - Drake','A Night Off - Drake',
+        'Say What\'s Real - Drake','Little Bit - Drake','Best I Ever Had - Drake','Unstoppable - Drake','Uptown - Drake','Sooner Than Later - Drake',
+        'The Calm - Drake','Outro - Drake', 'Brand New - Drake','Congratulations - Drake'
+    ]},
+    { row: 3, column: 3, answer: [
+        'My Name Is - Eminem', 'Guilty Conscience - Eminem','Brain Damage - Eminem','If I Had - Eminem','\'97 Bonnie & Clyde - Eminem','Role Model - Eminem','My Fault - Eminem',
+        'Come On Everybody - Eminem', 'Rock Bottom - Eminem','As The World Turnes - Eminem', 'I\m Shady - Eminem','Bad Meets Evil - Eminem','Still Don\'t Give - Eminem'
+    ] },
 ]
 
 export default function Home() {
@@ -63,12 +91,12 @@ export default function Home() {
     const [per8, setPer8] = useState("100%")
     const [per9, setPer9] = useState("100%")
 
-    const [row1] = useState("Artist: beabadoobee") // ??? why use state
-    const [row2] = useState("Three or more\u00A0word title")
-    const [row3] = useState("Double letter\u00A0title")
-    const [col1] = useState("Artist: Laufey")
-    const [col2] = useState("Artist: Clairo")
-    const [col3] = useState("Artist: Oscar Lang")
+    const [row1] = useState("Artist: Rihanna") // ??? why use state
+    const [row2] = useState("Nominated for\u00A0a\u00A0Grammy")
+    const [row3] = useState("From debut\u00A0album")
+    const [col1] = useState("Artist: Kanye West")
+    const [col2] = useState("Artist: Drake")
+    const [col3] = useState("Artist: Eminem")
 
     const [answers2, setAnswers2] = useState([]);
 
@@ -214,9 +242,9 @@ export default function Home() {
 
     const getGridPercentageByGuess = (grid, guess) => {
         console.log(answers2.data.result.rows)
-        console.log("grid: " + grid) 
+        console.log("grid: " + grid)
         console.log("guess: " + guess)
-        let percentage = answers2.data.result.rows.find((element) =>  element.grid === grid && element.song == guess)
+        let percentage = answers2.data.result.rows.find((element) => element.grid === grid && element.song == guess)
         if (percentage == undefined) percentage = 100
         else percentage = Math.ceil(percentage.viewpercentage * 100)
         console.log(percentage)
@@ -240,21 +268,21 @@ export default function Home() {
     }, [])
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-between p-14">
-            <div className="relative flex place-items-center text-slate-800 text-5xl font-semibold">
-                SongGrid
+        <div className="flex min-h-screen flex-col items-center justify-between p-14 bg-[#f6f2df]">
+            <div className="relative flex place-items-center text-[#293D33] text-5xl font-semibold pt-2">
+                ♪ SongGrid<a href="https://github.com/tylerofren" target="_blank">😎</a>
             </div>
-            <div className="">
+            <div className="font-medium">
                 <main className="flex flex-col items-center relative text-[24x] w-[620px] h-[620px]">
                     <div className="grid grid-cols-[12.5%_25%_25%_25%_12.5%] grid-rows-[16%_28%_28%_28%] gap-0 w-full h-full text-[14px]">
-                        <div className="text-center row-start-1 col-start-2 pb-1 px-2 flex items-center justify-center"><button>{col1}</button></div>
-                        <div className="text-center row-start-1 col-start-3 pb-1 px-2 flex items-center justify-center"><button>{col2}</button></div>
-                        <div className="text-center row-start-1 col-start-4 pb-1 px-2 flex items-center justify-center"><button>{col3}</button></div>
+                        <div className="text-center row-start-1 col-start-2 pt-2 px-2 flex items-center justify-center"><button>{col1}</button></div>
+                        <div className="text-center row-start-1 col-start-3 pt-2 px-2 flex items-center justify-center"><button>{col2}</button></div>
+                        <div className="text-center row-start-1 col-start-4 pt-2 px-2 flex items-center justify-center"><button>{col3}</button></div>
                         <div className="text-center row-start-2 col-start-1 pr-2 px-2 flex items-center justify-center w-0"><button>{row1}</button></div>
                         <div className="text-center row-start-3 col-start-1 pr-2 px-2 flex items-center justify-center w-0"><button>{row2}</button></div>
                         <div className="text-center row-start-4 col-start-1 pr-2 px-2 flex items-center justify-center w-0"><button>{row3}</button></div>
 
-                        <div className="row-start-2 col-start-2 border-t border-l border-neutral-500">
+                        <div className="row-start-2 col-start-2 border-t border-l border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg ? "cursor-pointer" : null)} onClick={() => { if (!showImg) setShowModal(!showModal); setRowCategory(1); setColCategory(1) }}>
                                 {showImg && <Image src={img} fill={true} alt="Song picture" />}
                                 {showImg &&
@@ -263,7 +291,7 @@ export default function Home() {
                                     </div>}
                             </div>
                         </div>
-                        <div className="row-start-2 col-start-3 border border-b-0 border-neutral-500">
+                        <div className="row-start-2 col-start-3 border border-b-0 border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg2 ? "cursor-pointer" : null)} onClick={() => { if (!showImg2) setShowModal(!showModal), setRowCategory(1), setColCategory(2) }}>
                                 {showImg2 && <Image src={img2} fill={true} alt="Song picture" />}
                                 {showImg2 &&
@@ -272,7 +300,7 @@ export default function Home() {
                                     </div>}
                             </div>
                         </div>
-                        <div className="row-start-2 col-start-4 border-t border-r border-neutral-500">
+                        <div className="row-start-2 col-start-4 border-t border-r border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg3 ? "cursor-pointer" : null)} onClick={() => { if (!showImg3) setShowModal(!showModal), setRowCategory(1), setColCategory(3) }}>
                                 {showImg3 && <Image src={img3} fill={true} alt="Song picture" />}
                                 {showImg3 &&
@@ -281,7 +309,7 @@ export default function Home() {
                                     </div>}
                             </div>
                         </div>
-                        <div className="row-start-3 col-start-2 border border-r-0 border-neutral-500">
+                        <div className="row-start-3 col-start-2 border border-r-0 border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg4 ? "cursor-pointer" : null)} onClick={() => { if (!showImg4) setShowModal(!showModal), setRowCategory(2), setColCategory(1) }}>
                                 {showImg4 && <Image src={img4} fill={true} alt="Song picture" />}
                                 {showImg4 &&
@@ -290,7 +318,7 @@ export default function Home() {
                                     </div>}
                             </div>
                         </div>
-                        <div className="row-start-3 col-start-3 border border-neutral-500">
+                        <div className="row-start-3 col-start-3 border border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg5 ? "cursor-pointer" : null)} onClick={() => { if (!showImg5) setShowModal(!showModal), setRowCategory(2), setColCategory(2) }}>
                                 {showImg5 && <Image src={img5} fill={true} alt="Song picture" />}
                                 {showImg5 &&
@@ -299,7 +327,7 @@ export default function Home() {
                                     </div>}
                             </div>
                         </div>
-                        <div className="row-start-3 col-start-4 border border-l-0 border-neutral-500">
+                        <div className="row-start-3 col-start-4 border border-l-0 border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg6 ? "cursor-pointer" : null)} onClick={() => { if (!showImg6) setShowModal(!showModal), setRowCategory(2), setColCategory(3) }}>
                                 {showImg6 && <Image src={img6} fill={true} alt="Song picture" />}
                                 {showImg6 &&
@@ -308,7 +336,7 @@ export default function Home() {
                                     </div>}
                             </div>
                         </div>
-                        <div className="row-start-4 col-start-2 border-b border-l border-neutral-500">
+                        <div className="row-start-4 col-start-2 border-b border-l border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg7 ? "cursor-pointer" : null)} onClick={() => { if (!showImg7) setShowModal(!showModal), setRowCategory(3), setColCategory(1) }}>
                                 {showImg7 && <Image src={img7} fill={true} alt="Song picture" />}
                                 {showImg7 &&
@@ -317,7 +345,7 @@ export default function Home() {
                                     </div>}
                             </div>
                         </div>
-                        <div className="row-start-4 col-start-3 border border-t-0 border-neutral-500">
+                        <div className="row-start-4 col-start-3 border border-t-0 border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg8 ? "cursor-pointer" : null)} onClick={() => { if (!showImg8) setShowModal(!showModal), setRowCategory(3), setColCategory(2) }}>
                                 {showImg8 && <Image src={img8} fill={true} alt="Song picture" />}
                                 {showImg8 &&
@@ -326,7 +354,7 @@ export default function Home() {
                                     </div>}
                             </div>
                         </div>
-                        <div className="row-start-4 col-start-4 border-b border-r border-neutral-500">
+                        <div className="row-start-4 col-start-4 border-b border-r border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg9 ? "cursor-pointer" : null)} onClick={() => { if (!showImg9) setShowModal(!showModal), setRowCategory(3), setColCategory(3) }}>
                                 {showImg9 && <Image src={img9} fill={true} alt="Song picture" />}
                                 {showImg9 &&
@@ -339,17 +367,17 @@ export default function Home() {
                         <div className="row-start-3 col-start-5 flex flex-col items-center justify-center text-center pl-20 h-full w-0 gap-2">
                             <div className="text-nowrap text-[16px]">Guesses left:</div>
                             <div className="text-[16px] font-semibold">{guesses}</div>
-                            <button className="text-nowrap bg-red-100 rounded-md transition-colors duration-200 transform
-                                hover:bg-red-300 pt-1 pb-1 px-2" onClick={() => setShowLoseModal(true)}>give up?</button>
+                            <button className="text-nowrap bg-white rounded-md transition-colors duration-200 transform text-[14px] font-bold
+                                hover:bg-[#344e41] hover:text-[#FFFFFF] pt-2 pb-2 px-3 text-[#344e41]" onClick={() => setShowLoseModal(true)}>give up?</button>
                         </div>
                     </div>
 
-                    <div className="text-[14px] pt-4">No search by artist!</div>
+                    {/* <div className="text-[14px] pt-4">No search by artist!</div> */}
                 </main>
             </div>
 
             <div className="w-full h-full flex items-center justify-center">
-                <div className="text-[18px]">Footer</div>
+                {/* <div className="text-[18px]">Footer</div> */}
             </div>
 
 
