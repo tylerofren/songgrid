@@ -58,7 +58,7 @@ export default function LoseModal({ onClose, getCorrect }) {
                         <div className="sm:flex sm:items-start justify-center items-center">
                             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
                                 <div className="mt-2 flex flex-col justify-center pt-2">
-                                    <p className="text-md text-center text-gray-500">You got {getCorrect} / 9 correct !</p>
+                                    <p className="text-md text-center text-gray-500 pb-2 font-semibold">You got {getCorrect} / 9 correct !</p>
                                     {/* <div>Statistics:
                                         <ul>
                                             {topAnswers.map(answer => (
@@ -69,14 +69,14 @@ export default function LoseModal({ onClose, getCorrect }) {
                                             ))}
                                         </ul>
                                     </div> */}
-                                    <div className="text-center text-lg pt-2">Most Popular Correct Guesses</div>
+                                    <div className="text-center text-lg pt-2 font-semibold">Most Popular Correct Guesses</div>
                                     <div className="flex justify-center pt-2">
                                         <div className="grid w-64 h-64 border">
                                             {topAnswers.map(answer => (
                                                 <div className={"row-start-" + Math.ceil(answer.grid / 3) + " col-start-" + answer.grid % 3}>
                                                     <div className="w-full h-full block bg-modal relative border group">
                                                         <Image src={answer.img} fill={true} alt="Song picture"/>
-                                                        <div className="bg-neutral-100 absolute w-[30%] rounded-br border-r border-b">
+                                                        <div className="bg-neutral-100 absolute w-[40%] rounded-br border-r border-b">
                                                             <div className="relative text-center font-medium text-[10px]">{answer.viewpercentage}%</div>
                                                         </div>
                                                         <div className="absolute w-full h-full" title="asdf"></div>
@@ -88,14 +88,14 @@ export default function LoseModal({ onClose, getCorrect }) {
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="text-center text-lg pt-2">Rarest Correct Guesses</div>
+                                    <div className="text-center text-lg pt-2 font-semibold">Rarest Correct Guesses</div>
                                     <div className="flex justify-center pt-2">
                                         <div className="grid w-64 h-64 border">
                                             {botAnswers.map(answer => (
                                                 <div className={"row-start-" + Math.ceil(answer.grid / 3) + " col-start-" + answer.grid % 3}>
-                                                    <div className="w-full h-full block bg-modal relative border group">
+                                                    <div className="w-full h-full block bg-modal relative border border-slate-400 group">
                                                         <Image src={answer.img} fill={true} alt="Song picture" />
-                                                        <div className="bg-neutral-100 absolute w-[30%] rounded-br border-r border-b">
+                                                        <div className="bg-neutral-100 absolute w-[40%] rounded-br border-r border-b">
                                                             <div className="relative text-center font-medium text-[10px]">{answer.viewpercentage}%</div>
                                                         </div>
                                                         <div className="bg-neutral-100 absolute rounded-br border-r border-b hidden group-hover:block">
