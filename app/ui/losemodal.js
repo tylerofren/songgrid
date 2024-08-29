@@ -59,21 +59,11 @@ export default function LoseModal({ onClose, getCorrect }) {
                             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
                                 <div className="mt-2 flex flex-col justify-center pt-2">
                                     <p className="text-md text-center text-gray-500 pb-2 font-semibold">You got {getCorrect} / 9 correct !</p>
-                                    {/* <div>Statistics:
-                                        <ul>
-                                            {topAnswers.map(answer => (
-                                                <li key={answer.id}>{answer.grid} : {answer.song} : {answer.viewpercentage}%</li>
-                                            ))}
-                                            {botAnswers.map(answer => (
-                                                <li key={answer.id}>{answer.grid} : {answer.song} : {answer.viewpercentage}%</li>
-                                            ))}
-                                        </ul>
-                                    </div> */}
                                     <div className="text-center text-lg pt-2 font-semibold">Most Popular Correct Guesses</div>
                                     <div className="flex justify-center pt-2">
                                         <div className="grid w-64 h-64 border">
                                             {topAnswers.map(answer => (
-                                                <div className={"row-start-" + Math.ceil(answer.grid / 3) + " col-start-" + answer.grid % 3}>
+                                                <div key={answer.id} className={"row-start-" + Math.ceil(answer.grid / 3) + " col-start-" + answer.grid % 3}>
                                                     <div className="w-full h-full block bg-modal relative border group">
                                                         <Image src={answer.img} fill={true} alt="Song picture"/>
                                                         <div className="bg-neutral-100 absolute w-[40%] rounded-br border-r border-b">
@@ -92,7 +82,7 @@ export default function LoseModal({ onClose, getCorrect }) {
                                     <div className="flex justify-center pt-2">
                                         <div className="grid w-64 h-64 border">
                                             {botAnswers.map(answer => (
-                                                <div className={"row-start-" + Math.ceil(answer.grid / 3) + " col-start-" + answer.grid % 3}>
+                                                <div key={answer.id} className={"row-start-" + Math.ceil(answer.grid / 3) + " col-start-" + answer.grid % 3}>
                                                     <div className="w-full h-full block bg-modal relative border border-slate-400 group">
                                                         <Image src={answer.img} fill={true} alt="Song picture" />
                                                         <div className="bg-neutral-100 absolute w-[40%] rounded-br border-r border-b">
