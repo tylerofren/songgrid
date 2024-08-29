@@ -1,6 +1,9 @@
 import SongSearch from "./songsearch"
+import { useState } from 'react'
 
-export default function Modal({ onClose }) {
+export default function Modal({ onClose, onGuess, colCategory, rowCategory}) {
+    const [guess, setGuess] = useState('')
+    const [imgPass, setImgPass] = useState('');
 
     return (
         <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -10,16 +13,16 @@ export default function Modal({ onClose }) {
                     <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                         <div className="sm:flex sm:items-start justify-center items-center">
                             <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
-                                <h3 className="text-base font-semibold leading-6 text-gray-900 flex justify-center" id="modal-title">Guess the song</h3>
+                                <h3 className="text-base font-semibold leading-6 flex justify-center text-[#293D33]" id="modal-title">Guess the song</h3>
                                 <div className="mt-2 flex justify-center pt-2">
-                                    <p className="text-sm text-gray-500">Category1 x Category2</p>
+                                    <p className="text-sm text-[#293D33]">{colCategory} x {rowCategory}</p>
                                 </div>
-                                <SongSearch></SongSearch>
+                                <SongSearch onSelect={(query, img) => {setGuess(query); setImgPass(img); console.log("selected" + guess + " img " + img)}}></SongSearch>
                             </div>
                         </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                        <button onClick={onClose} type="button" className="inline-flex w-full justify-center rounded-md bg-zinc-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-zinc-500 sm:ml-3 sm:w-auto">Guess</button>
+                        <button onClick={() => onGuess(guess, imgPass)} type="button" className="inline-flex w-full justify-center rounded-md bg-zinc-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-zinc-500 sm:ml-3 sm:w-auto">Guess</button>
                         <button onClick={onClose} type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
                     </div>
                 </div>
