@@ -26,7 +26,7 @@ export default function SongSearch({ onSelect }) {
 
     const fetchSongs = (callback) => {
         axios
-            .get(`https://api.deezer.com/search?q=${query}&order=RANKING`)
+            .get(`https://songgrids.vercel.app/api/get-songsearch-results?query=${query}`)
             .then(response => {
                 console.log('searching w query ' + query)
                 songs2.splice(0, songs2.length)
@@ -46,7 +46,7 @@ export default function SongSearch({ onSelect }) {
                     }
                 }
             })
-            callback();
+        callback();
     }
 
     useEffect(() => {
@@ -68,7 +68,7 @@ export default function SongSearch({ onSelect }) {
     return (
         <div className="mx-auto h-full w-full pt-4">
             {/* change here */}
-            <Combobox immediate value={selected} onChange={(value) => { setSelected(value); if(value!=null)console.log("selected + " + value.name); if(value!=null)onSelect(value.name, value.img) }} onClose={() => { setQuery(query) }} __demoMode>
+            <Combobox immediate value={selected} onChange={(value) => { setSelected(value); if (value != null) console.log("selected + " + value.name); if (value != null) onSelect(value.name, value.img) }} onClose={() => { setQuery(query) }} __demoMode>
                 <div className="relative">
                     <ComboboxInput
                         spellCheck='false'
@@ -77,7 +77,7 @@ export default function SongSearch({ onSelect }) {
                             'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
                         )}
                         displayValue={(person) => person?.name}
-                        onChange={(event) => { setQuery(event.target.value);}}
+                        onChange={(event) => { setQuery(event.target.value); }}
                     />
                     <ComboboxButton className="group absolute inset-y-0 right-0 px-2.5">
                         <ChevronDownIcon className="size-4 fill-black group-data-[hover]:fill-black" />
@@ -92,7 +92,7 @@ export default function SongSearch({ onSelect }) {
                         'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0 z-40'
                     )}
                 >
-                    { filterSongs }
+                    {filterSongs}
                 </ComboboxOptions>
             </Combobox>
         </div>
