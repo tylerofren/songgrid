@@ -27,7 +27,6 @@ export default function SongSearch({ onSelect }) {
     const fetchSongs = (callback) => {
         axios
             .get(`https://api.deezer.com/search?q=${query}&order=RANKING`)
-            // .get(`https://ws.audioscrobbler.com/2.0/?method=track.search&track=${query}&api_key=93b076b0e136a204f45a69292934aade&format=json&limit=10`)
             .then(response => {
                 console.log('searching w query ' + query)
                 songs2.splice(0, songs2.length)
