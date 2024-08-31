@@ -12,7 +12,7 @@ import { createPool } from '@vercel/postgres';
 import { revalidatePath } from "next/cache";
 
 const answers = [
-    { row: 1, column: 1, answer: ['FourFiveSeconds - Rihanna', 'Run This Town - JAY-Z', 'Diamonds - Rihanna', 'Diamonds (Remix) - Rihanna'] },
+    { row: 1, column: 1, answer: ['FourFiveSeconds - Rihanna', 'Run This Town - JAY-Z', 'Diamonds - Rihanna', 'Diamonds (Remix) - Rihanna','All Of The Lights - Kanye West','Famous - Kanye West'] },
     { row: 1, column: 2, answer: ['Take Care - Drake', 'Too Good - Drake', 'What\'s My Name? (Album Version) - Rihanna','Work - Rihanna'] },
     { row: 1, column: 3, answer: ['Love The Way You Lie - Eminem', 'The Monster - Eminem','Love The Way You Lie (Part II) (Pt. 2) - Rihanna'] },
     { row: 2, column: 1, answer: ['Jail - Kanye West','Ultralight Beam - Kanye West','Famous - Kanye West','All Day - Kanye West','Bound 2 - Kanye West',
