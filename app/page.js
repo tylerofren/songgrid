@@ -270,7 +270,7 @@ export default function Home() {
     return (
         <div className="flex min-h-screen flex-col items-center justify-between p-14 bg-[#f6f2df]">
             <div className="relative flex place-items-center text-[#293D33] text-5xl font-semibold pt-2">
-                ♪ SongGrid<a href="https://github.com/tylerofren" target="_blank">😎</a>
+                ♪ SongGrid<a href="https://github.com/tylerofreneo" target="_blank">😎</a>
             </div>
             <div className="font-medium">
                 <main className="flex flex-col items-center relative text-[24x] w-[620px] h-[620px]">
