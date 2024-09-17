@@ -269,18 +269,18 @@ export default function Home() {
 
     return (
         <div className="flex min-h-screen flex-col items-center justify-between p-14 bg-[#f6f2df]">
-            <div className="relative flex place-items-center text-[#293D33] text-5xl font-semibold pt-2">
+            <div className="relative flex place-items-center text-[#293D33] sm:text-5xl font-semibold pt-2 text-4xl">
                 ♪ SongGrid<a href="https://github.com/tylerofreneo" target="_blank">😎</a>
             </div>
             <div className="font-medium">
-                <main className="flex flex-col items-center relative text-[24x] lg:w-[620px] lg:h-[620px] sm:w-[460px] sm:h-[460px] md:w-[520px] md:h-[520px]">
-                    <div className="grid grid-cols-[12.5%_25%_25%_25%_12.5%] grid-rows-[16%_28%_28%_28%] gap-0 w-full h-full text-[14px]">
-                        <div className="text-center row-start-1 col-start-2 pt-2 px-2 flex items-center justify-center"><button>{col1}</button></div>
-                        <div className="text-center row-start-1 col-start-3 pt-2 px-2 flex items-center justify-center"><button>{col2}</button></div>
-                        <div className="text-center row-start-1 col-start-4 pt-2 px-2 flex items-center justify-center"><button>{col3}</button></div>
-                        <div className="text-center row-start-2 col-start-1 pr-2 px-2 flex items-center justify-center w-0"><button>{row1}</button></div>
-                        <div className="text-center row-start-3 col-start-1 pr-2 px-2 flex items-center justify-center w-0"><button>{row2}</button></div>
-                        <div className="text-center row-start-4 col-start-1 pr-2 px-2 flex items-center justify-center w-0"><button>{row3}</button></div>
+                <main className="flex flex-col items-center relative text-[24x] w-[220px] h-[220px] lg:w-[620px] lg:h-[620px] sm:w-[460px] sm:h-[460px] md:w-[520px] md:h-[520px]">
+                    <div className="grid grid-cols-[12.5%_25%_25%_25%_12.5%] grid-rows-[16%_28%_28%_28%] gap-0 w-full h-full text-[10px] sm:text-[14px]">
+                        <div className="text-center row-start-1 col-start-2 pb-9 sm:pt-2 sm:px-2 flex items-center justify-center"><button>{col1}</button></div>
+                        <div className="text-center row-start-1 col-start-3 pb-9 sm:pt-2 sm:px-2 flex items-center justify-center"><button>{col2}</button></div>
+                        <div className="text-center row-start-1 col-start-4 pb-9 sm:pt-2 sm:px-2 flex items-center justify-center"><button>{col3}</button></div>
+                        <div className="text-center row-start-2 col-start-1 sm:pr-2 sm:px-2 flex items-center justify-center w-0"><button>{row1}</button></div>
+                        <div className="text-center row-start-3 col-start-1 sm:pr-2 sm:px-2 flex items-center justify-center w-0"><button>{row2}</button></div>
+                        <div className="text-center row-start-4 col-start-1 sm:pr-2 sm:px-2 flex items-center justify-center w-0"><button>{row3}</button></div>
 
                         <div className="row-start-2 col-start-2 border-t border-l border-neutral-500 bg-[#ffffff]">
                             <div className={"w-full h-full block bg-modal hover:bg-slate-300 relative " + (!showImg ? "cursor-pointer" : null)} onClick={() => { if (!showImg) setShowModal(!showModal); setRowCategory(1); setColCategory(1) }}>
@@ -364,7 +364,7 @@ export default function Home() {
                             </div>
                         </div>
 
-                        <div className="row-start-3 col-start-5 flex flex-col items-center justify-center text-center pl-20 h-full w-0 gap-2 sm:pl-12 md:pl-20">
+                        <div className="row-start-3 col-start-5 flex flex-col items-center justify-center text-center pl-10 h-full w-0 gap-1 sm:gap-2 sm:pl-12 md:pl-20">
                             <div className="text-nowrap lg:text-[16px] sm:text-[12px] md:text-[14px]">Guesses left:</div>
                             <div className="lg:text-[16px] font-semibold sm:text-[12px] md:text-[14px]">{guesses}</div>
                             <button className="text-nowrap bg-white rounded-md transition-colors duration-200 transform lg:text-[14px] sm:text-[10px] md:text-[12px] font-bold
