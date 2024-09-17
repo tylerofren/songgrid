@@ -273,7 +273,7 @@ export default function Home() {
                 ♪ SongGrid<a href="https://github.com/tylerofreneo" target="_blank">😎</a>
             </div>
             <div className="font-medium">
-                <main className="flex flex-col items-center relative text-[24x] w-[620px] h-[620px]">
+                <main className="flex flex-col items-center relative text-[24x] lg:w-[620px] lg:h-[620px] sm:w-[460px] sm:h-[460px] md:w-[520px] md:h-[520px]">
                     <div className="grid grid-cols-[12.5%_25%_25%_25%_12.5%] grid-rows-[16%_28%_28%_28%] gap-0 w-full h-full text-[14px]">
                         <div className="text-center row-start-1 col-start-2 pt-2 px-2 flex items-center justify-center"><button>{col1}</button></div>
                         <div className="text-center row-start-1 col-start-3 pt-2 px-2 flex items-center justify-center"><button>{col2}</button></div>
@@ -364,10 +364,10 @@ export default function Home() {
                             </div>
                         </div>
 
-                        <div className="row-start-3 col-start-5 flex flex-col items-center justify-center text-center pl-20 h-full w-0 gap-2">
-                            <div className="text-nowrap text-[16px]">Guesses left:</div>
-                            <div className="text-[16px] font-semibold">{guesses}</div>
-                            <button className="text-nowrap bg-white rounded-md transition-colors duration-200 transform text-[14px] font-bold
+                        <div className="row-start-3 col-start-5 flex flex-col items-center justify-center text-center pl-20 h-full w-0 gap-2 sm:pl-12 md:pl-20">
+                            <div className="text-nowrap lg:text-[16px] sm:text-[12px] md:text-[14px]">Guesses left:</div>
+                            <div className="lg:text-[16px] font-semibold sm:text-[12px] md:text-[14px]">{guesses}</div>
+                            <button className="text-nowrap bg-white rounded-md transition-colors duration-200 transform lg:text-[14px] sm:text-[10px] md:text-[12px] font-bold
                                 hover:bg-[#344e41] hover:text-[#FFFFFF] pt-2 pb-2 px-3 text-[#344e41]" onClick={() => setShowLoseModal(true)}>give up?</button>
                         </div>
                     </div>
